@@ -1,0 +1,3 @@
+class Employcomment < ApplicationRecord
+    
+end

@@ -1,0 +1,2 @@
+module EmpcommentHelper
+end
