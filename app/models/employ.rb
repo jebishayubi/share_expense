@@ -2,7 +2,7 @@ class Employ < ApplicationRecord
     has_secure_password
     has_many :expenses, dependent: :destroy 
    
-    before_save :downcase_email
+    # before_save :downcase_email
     before_validation :downcase_email
     validates :email, format: {with: URI::MailTo::EMAIL_REGEXP}, presence: true, uniqueness: true
     # validates :email, format: {with: URI::MailTo::EMAIL_REGEXP}, presence: true, uniqueness: true , on: :create

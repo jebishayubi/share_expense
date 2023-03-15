@@ -5,7 +5,7 @@ ruby "3.0.4"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4", ">= 7.0.4.2"
-
+gem 'byebug', '~> 9.0', '>= 9.0.6'
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
@@ -65,7 +65,15 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
-
+# group :development, :test do
+#   gem 'rspec-rails', ">= 3.9.0"
+# end
+group :development, :test do
+  gem "rspec-rails"
+end
+group :development, :test do
+  gem 'factory_bot_rails'
+end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"

@@ -196,11 +196,21 @@ end
 end
 
 def invoicevalidation
-    # @expense=Expense.where(employ_id: params[:employ_id],id: params[:id])
-    # invoice = @expense.invoice_number
-    invoice = 2
+    @expense=Expense.find_by(id: params[:id])
+    invoice = @expense.invoice_number
     @response = `curl -H "X-API-Key: b490bb80" -X POST -d '{"invoice_id":#{invoice}}' https://my.api.mockaroo.com/invoices.json`
-    render json: @response
+    # render json: JSON.parse(@response)['status']
+    if(JSON.parse(@response)['status'])
+        @expense = @expense.update(approvalstatus: "1")
+        @amount =  Expense.find(params[:id])
+        @status = "approved"
+        ReportMailer.with(amount: @amount.amount,status: @status).status_change(@employee_email).deliver_now
+        render json: "Approved"   
+    else
+        @amount =  Expense.find(params[:id])
+        ReportMailer.with(amount: @amount.amount,status: "rejected").status_change(@employee_email).deliver_now
+        render json: "Not Approved"
+end
 end
 
 
