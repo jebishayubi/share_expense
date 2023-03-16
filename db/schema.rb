@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_08_053856) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_16_021157) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,6 +72,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_053856) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["employ_id"], name: "index_expenses_on_employ_id"
+  end
+
+  create_table "processingfees", force: :cascade do |t|
+    t.integer "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "ecomments", "expenses"
